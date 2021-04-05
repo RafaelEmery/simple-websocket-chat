@@ -19,14 +19,17 @@ def handle_client(conn, addr):
     connected = True
     while connected:
         msg_length = conn.recv(HEADER).decode(FORMAT)    # receiving the size of message
-        msg_length = int(msg_length)    # casting length
-        msg = conn.recv(msg_length).decode(FORMAT)    # receiving the message
 
-        # verify if msg is the disconnect message and break while statement
-        if (msg == DISCONNECT_MESSAGE):
-            connected = False
+        # verify if msg_lenth is valid
+        if msg_length:
+            msg_length = int(msg_length)    # casting length
+            msg = conn.recv(msg_length).decode(FORMAT)    # receiving the message
 
-        print(f"[{addr}] {msg}")
+            # verify if msg is the disconnect message and break while statement
+            if (msg == DISCONNECT_MESSAGE):
+                connected = False
+
+            print(f"[{addr}] {msg}")
 
     conn.close()    # closing connection
 
