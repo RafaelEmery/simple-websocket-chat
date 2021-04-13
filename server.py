@@ -2,7 +2,7 @@ import socket    # importing sockets
 import threading    # create multiple threads
 
 HEADER = 64    # defining the header of messages
-PORT = 5050    # choosing port, search about why is that specific port
+PORT = 5555    # choosing port, search about why is that specific port
 SERVER = socket.gethostbyname(socket.gethostname())    # getting ipv4 by hostname
 ADDR = (SERVER, PORT)    # tuple for binding sockets
 FORMAT = 'utf-8'    # defining the format of headers
@@ -22,7 +22,7 @@ def handle_client(conn, addr):
 
         # verify if msg_lenth is valid
         if msg_length:
-            msg_length = int(msg_length)    # casting length
+            msg_length = int(msg_length)    # cast length
             msg = conn.recv(msg_length).decode(FORMAT)    # receiving the message
 
             # verify if msg is the disconnect message and break while statement
@@ -30,6 +30,7 @@ def handle_client(conn, addr):
                 connected = False
 
             print(f"[{addr}] {msg}")
+            conn.send("Message received".encode(FORMAT))    # sending the message to client
 
     conn.close()    # closing connection
 
