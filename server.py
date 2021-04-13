@@ -14,7 +14,7 @@ server.bind(ADDR)    # binding the socket to local address
 # start a new thread and handle the individual connection
 # connection and address as params
 def handle_client(conn, addr):
-    print(f"[NEW CONNECTION] {addr} connected.")
+    print(f"[NOVA CONEXÃO] {addr} conectado.")
 
     connected = True
     while connected:
@@ -30,22 +30,22 @@ def handle_client(conn, addr):
                 connected = False
 
             print(f"[{addr}] {msg}")
-            conn.send("Message received".encode(FORMAT))    # sending the message to client
+            conn.send("A mensagem foi recebida pelo servidor!".encode(FORMAT))    # sending the message to client
 
     conn.close()    # closing connection
 
 # start the server and handle and distribute new connections
 def start():
     server.listen()    # start listening the server
-    print(f"[LISTENING] server is listening on {SERVER}")
+    print(f"[OUVINDO] servidor ouvindo em {SERVER}")
 
     while True:
         conn, addr = server.accept()    # store the address and the object of connection
         thread = threading.Thread(target=handle_client, args=(conn, addr))    # creating a new thread using handle_client function
         thread.start()    # starting the thread
 
-        print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}.")    # printing the amount of thread and -1 is because start is always the inicial thread
+        print(f"[CONEXÕES ATIVAS] {threading.activeCount() - 1}.")    # printing the amount of thread and -1 is because start is always the inicial thread
 
-print("[STARTING] server is starting...")
+print("[INICIANDO] Servidor rodando...")
 
 start()

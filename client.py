@@ -22,11 +22,14 @@ def send(msg):
     print(client.recv(2048).decode(FORMAT))    # printing the received message
 
 # sending messages
-send('Hello World!')
+send("Olá mundo? Tudo certo com vocês?")
 input()
-send('Hello people!')
+send("Aqui é o cliente! Estou enviando esta mensagem para você ver que eu estou online :D")
 input()
-send('Fala Rafa! Beleza?')
+send("Quando eu envio a mensagem, recebo uma confirmação direto do servidor também!")
+input()
+send("Agora eu vou sair... Até a próxima!")
 
+# disconnecting
 send(DISCONNECT_MESSAGE)
 
